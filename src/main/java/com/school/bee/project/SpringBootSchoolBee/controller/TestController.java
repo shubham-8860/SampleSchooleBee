@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.school.bee.project.SpringBootSchoolBee.dto.EmployeeDto;
 import com.school.bee.project.SpringBootSchoolBee.dto.SampleDto;
 import com.school.bee.project.SpringBootSchoolBee.service.TestService;
 
@@ -29,5 +30,10 @@ public class TestController {
 	public SampleDto getTestDataById() {
 		SampleDto dataByid = testService.getTestDataById(1);
 		return dataByid;
+	}
+	
+	@GetMapping("/getEmployeeDtoData")
+	public EmployeeDto convertJsonToJavaDto() {
+		return testService.convertJsonToJavaDto();
 	}
 }
