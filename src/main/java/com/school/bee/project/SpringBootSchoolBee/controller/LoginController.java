@@ -9,8 +9,7 @@ public class LoginController {
 	
 	@RequestMapping(value="/login" , method = RequestMethod.GET)
 	public String login() {
-		String s1 = "You are Successfully LoggedIn";
-		return s1;
+		return "You are Successfully LoggedIn for Conflict";
 	}
 
 }
