@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.school.bee.project.SpringBootSchoolBee.dao.TestDao;
+import com.school.bee.project.SpringBootSchoolBee.dto.EmployeeDto;
 import com.school.bee.project.SpringBootSchoolBee.dto.SampleDto;
 import com.school.bee.project.SpringBootSchoolBee.service.TestService;
 
@@ -23,6 +24,12 @@ public class TestServiceImpl implements TestService{
 	@Override
 	public SampleDto getTestDataById(int id) {
 		return testDao.getTestDataById(id);
+	}
+
+	@Override
+	public EmployeeDto convertJsonToJavaDto() {
+		
+		return testDao.convertJsonToJavaDto();
 	}
 
 }

@@ -1,11 +1,18 @@
 package com.school.bee.project.SpringBootSchoolBee.daoImpl;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.school.bee.project.SpringBootSchoolBee.dao.TestDao;
+import com.school.bee.project.SpringBootSchoolBee.dto.EmployeeDto;
 import com.school.bee.project.SpringBootSchoolBee.dto.SampleDto;
 
 @Repository
@@ -42,6 +49,39 @@ public class TestDaoImpl implements TestDao {
 		        }
 		    }
 		return null;
+	}
+
+	
+	
+	@Override
+	public EmployeeDto convertJsonToJavaDto() {
+		/*
+		 * { "name":"David", "position":"Software Engineer", "skilltree":[ "Java",
+		 * "Python", "JavaScript" ], "address":{ "street":"Street", "streetNo":"123" } }
+		 */
+		EmployeeDto employeeData=null;
+		String result=null;
+	    try {
+			result = new String(Files.readAllBytes(Paths.get("C://Shubham//Employee.json")));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}  
+   
+		//String json = "{ \"name\":\"David\", \"position\":\"SOFTWARE_ENGINEER\", \"skilltree\":[ \"Java\", \"Python\", \"JavaScript\" ], \"address\":{ \"street\":\"Street\", \"streetNo\":\"123\" } }";
+
+		ObjectMapper objectMapper = new ObjectMapper();
+		
+		// Deserialization into the `EmployeeDto` class
+		try {
+			employeeData = objectMapper.readValue(result, EmployeeDto.class);
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+
+		System.out.println(employeeData);
+		return employeeData;
 	}
 
 	
